@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lista de Géneros y Canciones</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+      }
+      section {
+        background-color: #fff;
+        margin: 20px;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      p {
+        margin: 0;
+        padding: 5px 0;
+      }
+      strong {
+        font-weight: bold;
+      }
+      ul {
+        list-style-type: none;
+        padding-left: 0;
+      }
+      li {
+        margin-left: 20px;
+      }
+      .song {
+        margin-left: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <% generos.forEach((genero) => { %>
+    <section>
+      <p><strong>Nombre del género:</strong> <%= genero.nombre %></p>
+      <p><strong>Canciones:</strong></p>
+      <ul>
+        <% genero.generos.forEach((cancion) => { %>
+        <li class="song">- <%= cancion.nombre %></li>
+        <% }); %>
+      </ul>
+    </section>
+    <% }); %>
+  </body>
+</html>
