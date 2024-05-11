@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lista de Álbumes</title>
+    <title>Lista de Canciones</title>
     <style>
       h1 {
         text-align: center;
@@ -25,18 +25,22 @@
         margin: 0;
         padding: 5px 0;
       }
-      strong {
-        font-weight: bold;
+      ul {
+        list-style-type: none;
+        padding-left: 0;
+      }
+      li {
+        margin-left: 20px;
       }
     </style>
   </head>
   <body>
-    <h1>Lista de Álbumes</h1>
-    <% albumes.forEach((album) => { %>
+    <h1>Lista de Canciones</h1>
+    <% canciones.forEach((cancion) => { %>
     <section>
-      <p><strong>Id:</strong> <%= album.id %></p>
-      <p><strong>Nombre:</strong> <%= album.titulo %></p>
-      <p><strong>Artista:</strong> <%= album.artista.nombre %></p>
+      <p><strong>Nombre de la canción:</strong> <%= cancion.nombre %></p>
+      <p><strong>Género:</strong> <%= cancion.genero.nombre %></p>
+      <p><strong>Tipo de medio:</strong> <%= cancion.medio.nombre %></p>
     </section>
     <% }); %>
   </body>
