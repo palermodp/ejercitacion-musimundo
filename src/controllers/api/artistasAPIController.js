@@ -1,4 +1,5 @@
 const artistaService = require("../../service/artistaApiService");
+const db = require("../../database/models");
 
 const artistasAPIController = {
   list: async (req, res) => {
@@ -10,20 +11,32 @@ const artistasAPIController = {
       return res.status(500).send("Error al intentar buscar los artistas.");
     }
   },
-  create: (req, res) => {
-    return res.send(
-      "Puedes agregar un nuevo artista a nuestra base de datos. Para porder utilizar esta API, debes ejecutar la ruta /artistas/create/id desde la plataforma POSTMAN"
-    );
+  create: async function (req, res) {
+    try {
+      let artistaNuevo = await artistaService.crearArtista(req.body);
+      return res.json(artistaNuevo);
+    } catch (error) {
+      console.log(error);
+      return res.status(500).send("Error al intentar crear un artista.");
+    }
   },
-  update: (req, res) => {
-    return res.send(
-      "Puedes modifcar el nombre del artista en nuestra base de datos. Para porder utilizar esta API, debes ejecutar la ruta /artistas/update/id desde la plataforma POSTMAN"
-    );
+  update: async function (req, res) {
+    try {
+      let artistaEditado = await artistaService.editarArtista(req.body, req);
+      return res.json(artistaEditado);
+    } catch (error) {
+      console.log(error);
+      return res.status(500).send("Error al intentar editar un artista.");
+    }
   },
-  destroy: (req, res) => {
-    return res.send(
-      "Puedes eliminar un artista a nuestra base de datos. Para porder utilizar esta API, debes ejecutar la ruta /artistas/delete/id desde la plataforma POSTMAN"
-    );
+  destroy: async function (req, res) {
+    try {
+      let artistaEliminado = await artistaService.eliminarArtista(req);
+      return res.json(artistaEliminado);
+    } catch (error) {
+      console.log(error);
+      return res.status(500).send("Error al intentar eliminar un artista.");
+    }
   },
 };
 module.exports = artistasAPIController;

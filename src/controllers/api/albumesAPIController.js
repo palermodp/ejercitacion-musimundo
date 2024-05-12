@@ -1,5 +1,4 @@
 const albumService = require("../../service/albumesApiService");
-const db = require("../../database/models");
 
 const albumesAPIController = {
   list: async (req, res) => {
@@ -12,21 +11,15 @@ const albumesAPIController = {
     }
   },
   detail: async (req, res) => {
-    const artistaId = req.params.id;
     try {
-      const album = await db.Album.findOne({
-        where: {
-          id_artista: artistaId,
-        },
-        include: [{ association: "artista" }],
-      });
-      if (!album) {
-        return res.status(404).send("Álbum no encontrado");
-      }
-      return res.render("detalleAlbum", { album });
+      const artistaId = req.params.id;
+      const albumDetail = await albumService.obtenerDetalleAlbum(artistaId);
+      return res.render("detalleAlbum", { album: albumDetail });
     } catch (error) {
       console.log(error);
-      return res.status(500).send("Error al buscar el álbum.");
+      return res
+        .status(500)
+        .send("Error al intentar buscar los detalles del álbum.");
     }
   },
 };
